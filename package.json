@@ -1,0 +1,29 @@
+{
+	"name": "generic-ping",
+	"version": "1.0.0",
+	"api_version": "1.0.0",
+	"keywords": [
+		"Ping"
+	],
+	"manufacturer": "Generic",
+	"product": "Ping",
+	"shortname": "generic-ping",
+	"homepage": "https://github.com/bitfocus/companion-module-generic-ping#readme",
+	"description": "Pings a remote host and shows if it is alive.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Joseph Adams <josephdadams@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+		"ping": "^0.4.2"
+	},
+	"bugs": {
+		"url": "https://github.com/bitfocus/companion-module-generic-ping/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-module-generic-ping.git"
+	}
+}
