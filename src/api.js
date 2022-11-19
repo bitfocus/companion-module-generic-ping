@@ -1,52 +1,50 @@
 const ping = require('ping');
 
 module.exports = {
-	startPing() {
-		let self = this; // required to have reference to outer `this`
+	startPing() {		
+		const host = this.config.host;
+		const timeout = this.config.timeout;
 
-		self.STOP_PING = false;
+		const retryrate = this.config.retryrate;
 		
-		const host = self.config.host;
-		const timeout = self.config.timeout;
-
-		const retryrate = self.config.retryrate;
-		
-		sendPing.bind(self)(host, timeout, retryrate);
+		if (this.PING_INTERVAL == null) {
+			sendPing.bind(this)(host, timeout, retryrate);
+		}		
 	},
 
 	stopPing() {
-		let self = this; // required to have reference to outer `this`
-		self.log('info', 'Stopping Ping.');
-		self.STOP_PING = true;
+		this.log('info', 'Stopping Ping.');
+		clearInterval(this.PING_INTERVAL);
+		this.PING_INTERVAL = null;
+		this.STOP_PING = true;		
 	}
 }
 
 async function sendPing(host, timeout, retryrate) {
-	let self = this;
-
 	try {
-		if (self.config.verbose) {
-			self.log('debug', 'Sending Ping to ' + host);
+		if (this.config.verbose) {
+			this.log('debug', 'Sending Ping to ' + host);
 		}
 
 		if (retryrate == 0) {
-			self.log('info', 'Retry Rate is 0. Module will send one ping, and then stop.');
+			this.log('info', 'Retry Rate is 0. Module will send one ping, and then stop.');
 		}
 
 		let res = await ping.promise.probe(host, {
 			timeout: timeout
 		});
 		
-		self.alive = res.alive;
+		this.alive = res.alive;
 
-		if (self.config.verbose) {
-			//self.log('debug', 'Ping Output: ' + res.output);
+		if (this.config.verbose) {
+			//this.log('debug', 'Ping Output: ' + res.output);
 		}		
 
-		self.min = res.min;
-		self.max = res.max;
-		self.avg = res.avg;
-		self.packetLoss = res.packetLoss;
+		this.min = res.min;
+		this.max = res.max;
+		this.avg = res.avg;
+		this.packetLoss = res.packetLoss;
+		this.lastping = new Date();
 
 		if (res.alive == true) {
 			this.status(this.STATUS_OK);
@@ -59,14 +57,18 @@ async function sendPing(host, timeout, retryrate) {
 			this.status(this.STATUS_UNKNOWN);
 		}
 
-		self.checkFeedbacks();
-		self.checkVariables();
+		this.checkFeedbacks();
+		this.checkVariables();
 
-		if (retryrate > 0 && self.STOP_PING !== true) {
-			setTimeout(sendPing.bind(self), retryrate, host, timeout, retryrate);
+		if (this.STOP_PING || retryrate == 0) {
+			clearInterval(this.PING_INTERVAL);
+			this.PING_INTERVAL = null;
 		}
+		else if (retryrate > 0) {
+			this.PING_INTERVAL = setTimeout(sendPing.bind(this), retryrate, host, timeout, retryrate);
+		}		
 	}
 	catch(error) {
-		self.log('error', 'Error pinging: ' + error);
+		this.log('error', 'Error pinging: ' + error);
 	}
 }

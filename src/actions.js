@@ -7,6 +7,7 @@ module.exports = {
 		actionsArr.startPing = {
 			label: 'Start Ping',
 			callback: function(action, bank) {
+				self.STOP_PING = false;
 				self.startPing();
 			}
 		};

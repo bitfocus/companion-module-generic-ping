@@ -7,6 +7,7 @@ module.exports = {
 			{ label: 'Response Time (Max)', name: 'response_time_max'},
 			{ label: 'Response Time (Avg)', name: 'response_time_avg'},
 			{ label: 'Packet Loss %', name: 'packet_loss'},
+			{ label: 'Last Date/Time Ping', name: 'last_ping'}
 		]
 
 		this.setVariableDefinitions(variables);
@@ -20,6 +21,7 @@ module.exports = {
 			this.setVariable('response_time_max', this.max);
 			this.setVariable('response_time_avg', this.avg);
 			this.setVariable('packet_loss', this.packetLoss);
+			this.setVariable('last_ping', this.lastping);
 		}
 		catch(error) {
 			//do something with that error

@@ -20,7 +20,9 @@ class GenericPingInstance extends InstanceSkel {
 		this.max = '';
 		this.avg = '';
 		this.packetLoss = '';
+		this.lastping = '';
 
+		this.PING_INTERVAL = null;
 		this.STOP_PING = false;
 
 		// Assign the methods from the listed files to this class
@@ -48,7 +50,7 @@ class GenericPingInstance extends InstanceSkel {
 
 		// Quickly check if certain config values are present and continue setup
 		if (this.config.host) {
-			if (this.INTERVAL) {
+			if (this.PING_INTERVAL) {
 				this.stopPing();
 			}
 
@@ -67,6 +69,7 @@ class GenericPingInstance extends InstanceSkel {
 
 			this.status(this.STATUS_UNKNOWN);
 
+			this.STOP_PING = false;
 			this.startPing();
 		}
 	}

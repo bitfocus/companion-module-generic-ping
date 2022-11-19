@@ -27,7 +27,7 @@ module.exports = {
 				id: 'retryrate',
 				width: 6,
 				label: 'Retry Rate (in ms) (How soon to try again)',
-				default: 5000,
+				default: 60000,
 			},
 			{
 				type: 'text',
