@@ -21,6 +21,8 @@ class GenericPingInstance extends InstanceSkel {
 		this.avg = '';
 		this.packetLoss = '';
 
+		this.STOP_PING = false;
+
 		// Assign the methods from the listed files to this class
 		Object.assign(this, {
 			...configFields,

@@ -8,7 +8,10 @@ This module will allow you to ping a remote device and use the response in a var
 
 ## Actions
 
-This module inherently has no actions. If you wish to perform an action based on a ping state, use a Trigger with the variables built into this module.
+If you wish to perform an action based on a ping state, use a Trigger with the variables built into this module.
+
+* Start Ping (Ping will auto start when module is configured, but if you want to stop pinging and restart it, use this action)
+* Stop Ping (Variables and Feedbacks will stop working also)
 
 ## Variables
 
