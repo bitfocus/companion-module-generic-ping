@@ -59,7 +59,9 @@ async function sendPing(host, timeout, retryrate) {
 		}
 		else if (res.alive == false) {
 			self.updateStatus(InstanceStatus.ConnectionFailure);
-			self.log('error', 'Host is not alive.');
+			if (!self.config.noerrlog) {
+				self.log('error', 'Host is not alive.');
+			}
 		}
 		else {
 			self.updateStatus(InstanceStatus.UnknownError);

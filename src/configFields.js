@@ -41,6 +41,12 @@ module.exports = {
 				id: 'verbose',
 				label: 'Enable Verbose Logging',
 				default: false
+			},
+			{
+				type: 'checkbox',
+				id: 'noerrlog',
+				label: 'Don\'t log "Host not alive" messages',
+				default: false
 			}
 		]
 	},
