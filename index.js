@@ -69,7 +69,7 @@ class GenericPingInstance extends InstanceBase {
 		//close out any connections
 		this.stopPing();
 
-		this.debug('destroy', this.id);
+		this.log('debug', 'destroy ' + this.id);
 	}
 }
 
