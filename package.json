@@ -3,11 +3,12 @@
 	"version": "2.0.0",
 	"main": "index.js",
 	"scripts": {
+		"build": "companion-module-build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"license": "MIT",
 	"dependencies": {
-		"@companion-module/base": "~1.4.1",
+		"@companion-module/base": "1.11.3",
 		"ping": "^0.4.2"
 	},
 	"repository": {
@@ -15,6 +16,10 @@
 		"url": "git+https://github.com/bitfocus/companion-module-generic-ping.git"
 	},
 	"devDependencies": {
-		"@companion-module/tools": "^2.8.0"
-	}
+		"@companion-module/tools": "~2.9.0"
+	},
+	"engines": {
+		"node": "^22.20"
+	},
+	"packageManager": "yarn@1.22.22"
 }
